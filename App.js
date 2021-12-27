@@ -8,22 +8,26 @@ import {
   Text,
   View,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {decNumber, incNumber} from './actions';
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  function decrementCount() {
-    setCount(count - 1);
-  }
-  function incrementCount() {
-    setCount(count + 1);
-  }
+  const myState = useSelector(state => state.changeTheNumber);
+  const dispatch = useDispatch();
+  // const [count, setCount] = useState(0);
+  // function decrementCount() {
+  //   setCount(count - 1);
+  // }
+  // function incrementCount() {
+  //   setCount(count + 1);
+  // }
   return (
     <SafeAreaView>
       <StatusBar />
       <View style={styles.container}>
-        <Button title="increment" onPress={() => incrementCount()} />
-        <Text>{count}</Text>
-        <Button title="decrement" onPress={() => decrementCount()} />
+        <Button title="increment" onPress={() => dispatch(incNumber(5))} />
+        <Text>{myState}</Text>
+        <Button title="decrement" onPress={() => dispatch(decNumber())} />
       </View>
     </SafeAreaView>
   );
